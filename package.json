@@ -1,0 +1,35 @@
+{
+  "name": "issuetrackerdiscord",
+  "version": "1.0.0",
+  "description": "Discord bot that will let you know when there is a new issue",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShubhankarKG/IssueTrackerDiscord.git"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "nodejs"
+  ],
+  "author": "ShubhankarKG",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ShubhankarKG/IssueTrackerDiscord/issues"
+  },
+  "homepage": "https://github.com/ShubhankarKG/IssueTrackerDiscord#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "discord.js": "^12.5.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
