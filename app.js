@@ -32,7 +32,7 @@ app.post("/github", async (req, res) => {
     res.status(200).json({ result: "success" });
 })
 
-const port = process.eventNames.PORT || 8000;
+const port = process.env.PORT || 8000;
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 })
