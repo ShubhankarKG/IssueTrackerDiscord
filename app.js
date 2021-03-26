@@ -16,10 +16,10 @@ client.login(process.env.DISCORD_BOT_TOKEN);
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
-	// set a new item in the Collection
-	// with the key as the command name and the value as the exported module
-	client.commands.set(command.name, command);
+    const command = require(`./commands/${file}`);
+    // set a new item in the Collection
+    // with the key as the command name and the value as the exported module
+    client.commands.set(command.name, command);
 }
 
 let channel;
@@ -29,18 +29,18 @@ client.on('ready', async () => {
 
     // create new channel called "issues" if does not exist
     channel = client.channels.cache.find((c) => c.name === 'issues');
-    if (!channel){
+    if (!channel) {
         msg.guild.channels.create('issues')
-        .then((c) => {
-            channel = c;
-        }).catch((err) => {console.log(err)});
+            .then((c) => {
+                channel = c;
+            }).catch((err) => { console.log(err) });
     }
     console.log("Bot is ready");
 })
 
 client.on('message', (msg) => {
     // ignore if a bot sends the message
-    if(!msg.content.startsWith(prefix) || msg.author.bot) return;
+    if (!msg.content.startsWith(prefix) || msg.author.bot) return;
 
     const args = msg.content.slice(prefix.length).trim().split(/ +/);
     const commandName = args.shift().toLowerCase();
@@ -51,25 +51,33 @@ client.on('message', (msg) => {
     // if(command === 'hello')
     //     return msg.reply(`Hello, ${msg.author.username}`);
 
-    if(!client.commands.has(commandName))
+    if (!client.commands.has(commandName))
         return msg.reply('No such command. Use `;;help` to find more info')
 
     const command = client.commands.get(commandName);
 
     // check if required args are provided
-    if(command.args && !args.length){
+    if (command.args && !args.length) {
         return msg.reply("No arguments provided :(");
     }
     try {
         command.execute(msg, args);
     } catch (error) {
-    	console.error(error);
-    	msg.reply('there was an error trying to execute that command!');
+        console.error(error);
+        msg.reply('there was an error trying to execute that command!');
     }
 });
 
 client.on("githubMessage", (msg) => {
-    channel.send(`New issue created: ${msg.issue.html_url}`);
+    if (msg.action === "opened") {
+        const issue = msg.issue;
+        const embed = "New issue created: " + issue.html_url;
+        channel.send(embed);
+    } else {
+        // We don't do that here;
+        return;
+    }
+
 });
 
 const app = express();
