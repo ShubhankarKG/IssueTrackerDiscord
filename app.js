@@ -25,16 +25,16 @@ for (const file of commandFiles) {
 let channel;
 
 client.on('ready', async () => {
-    // channel = await client.channels.fetch(process.env.DISCORD_CHANNEL_NUMBER);
+    channel = await client.channels.fetch(process.env.DISCORD_CHANNEL_NUMBER);
 
     // create new channel called "issues" if does not exist
-    channel = client.channels.cache.find((c) => c.name === 'issues');
-    if (!channel) {
-        msg.guild.channels.create('issues')
-            .then((c) => {
-                channel = c;
-            }).catch((err) => { console.log(err) });
-    }
+    // channel = client.channels.cache.find((c) => c.name === 'issues');
+    // if (!channel) {
+    //     msg.guild.channels.create('issues')
+    //         .then((c) => {
+    //             channel = c;
+    //         }).catch((err) => { console.log(err) });
+    // }
     console.log("Bot is ready");
 })
 
